@@ -2,33 +2,26 @@ const importBtn = document.querySelector(".button-main"),
     playlists = document.querySelectorAll(".item");
 
 
-importBtn.addEventListener("click", ()=> {importBtn.classList.toggle("import")});    
-
-    // Select all list items
-const listItems = document.querySelectorAll('.item');
-
-// Function to handle list item click
-function handleItemClick(event) {
-    // Get the clicked list item
-    const clickedItem = event.currentTarget;
-    // Toggle the 'active' class on the clicked list item
-    clickedItem.classList.toggle('active');
-}
-
-// Add a click event listener to each list item
-listItems.forEach(item => {
-    item.addEventListener('click', handleItemClick);
-});
-
+importBtn.addEventListener("click", ()=> {importBtn.classList.toggle("import"); populateList()});    
 
 // Fetch Spotify Data
 
 
-// Populate List of Playlists
-function populateList(data) {
+// Define a constant list of playlists
+const arrayOfPlaylists = [
+    { name: 'First Playlist' },
+    { name: 'Second Playlist' },
+    { name: 'Third Playlist' },
+    { name: 'AnotherOne Playlist' }
+];
+
+// Define the populateList function
+function populateList(playlists) {
+    // Select the list container
     const listContainer = document.querySelector('.list-items');
     
-    data.items.forEach(item => {
+    // Iterate over each playlist in the data
+    playlists.forEach(playlist => {
         // Create a new list item
         const listItem = document.createElement('li');
         listItem.classList.add('item');
@@ -37,12 +30,13 @@ function populateList(data) {
         const checkbox = document.createElement('span');
         checkbox.classList.add('checkbox');
         const checkmark = document.createElement('i');
-        checkmark.classList.add('fa-solid', 'fa-check');
+        checkmark.classList.add('fa-solid', 'fa-check', 'check-icon');
+        checkmark.style.color = '#FFF';
         checkbox.appendChild(checkmark);
         
         const itemText = document.createElement('span');
         itemText.classList.add('item-text');
-        itemText.textContent = item.name; // Set text based on item data
+        itemText.textContent = playlist.name; // Set text based on playlist data
         
         // Append elements to the list item
         listItem.appendChild(checkbox);
@@ -52,3 +46,23 @@ function populateList(data) {
         listContainer.appendChild(listItem);
     });
 }
+
+// Call populateList with the constant list of playlists
+populateList(arrayOfPlaylists);
+
+
+    // Select all list items
+    const listItems = document.querySelectorAll('.item');
+
+    // Function to handle list item click
+    function handleItemClick(event) {
+        // Get the clicked list item
+        const clickedItem = event.currentTarget;
+        // Toggle the 'active' class on the clicked list item
+        clickedItem.classList.toggle('active');
+    }
+    
+    // Add a click event listener to each list item
+    listItems.forEach(item => {
+        item.addEventListener('click', handleItemClick);
+    });

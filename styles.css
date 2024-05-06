@@ -1,0 +1,239 @@
+*{
+    margin: 0;
+    padding: 0;
+    Box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    
+    --main-background-color:#292E32;
+    --main-text-color:#FFFFFF;
+    --secondary-text-color:#BBB;
+
+    --main-button-color: #007AFF;
+    --secondary-button-color: #777;
+    background-color: var(--main-background-color);
+    
+}
+
+
+
+.flex-container-column{    
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.flex-container-row{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+
+/* CSS for the list container */
+.list-items {
+    /* Define the list layout, spacing, and styles */
+    list-style: none; /* Remove default list styling */
+    padding: 20px; /* Remove default padding */
+    margin: auto; /* Remove default margin */
+    width: 60%;
+    display: none;
+    
+}
+
+/* CSS for each list item */
+.item {
+    /* Define display and layout styles */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between elements inside the item */
+    padding: 10px 16px; /* Padding inside the item */
+    margin: 10px;
+    border-radius: 8px; /* Rounded corners for the item */
+    border: 2px solid var(--secondary-button-color); /* Grey border for the item */
+    cursor: pointer; /* Pointer cursor on hover */
+    height: 54px;
+    
+    /* Define hover effect for each item */
+    transition: border 0.3s; /* Smooth transition for border color change */
+    &:hover {
+        border: 2px solid var(--main-button-color); /* Change border color to blue on hover */
+    }
+}
+
+.item.active {
+    border-color: var(--main-button-color);
+}
+
+.item.active .checkbox{
+    background-color: var(--main-button-color);
+    border-color: var(--main-button-color);
+}
+
+.item.active .check-icon{
+    background-color: var(--main-button-color);
+    transform: scale(1);
+}
+
+/* CSS for the text inside each list item */
+.item-text {
+    /* Define text styles */
+    color: #FFF; /* Text color */
+    font-size: 16px; /* Text size */
+    line-height: normal; /* Line height */
+}
+
+.checkbox {
+    /* Define the size of the circle */
+    width: 24px;
+    height: 24px;
+    
+    /* Make the element circular */
+    border-radius: 50%;
+    
+    /* Add a grey border with 2px thickness */
+    border: 2px solid var(--secondary-button-color);
+    
+    /* Display settings */
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    
+}
+
+.check-icon {
+    transform: scale(0);
+}
+
+.button-main {
+    display: flex;
+    height: 54px;
+    color: var(--main-text-color);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    /* align-self: auto; */
+    margin: auto;
+    cursor: pointer;
+
+    border: 0px;
+    border-radius: 14px;
+    height: 54px;
+    width:  60%;
+
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    background: var(--main-button-color);
+  }
+
+  .button-main.import ~ .list-items{
+    display: block;
+    }
+
+/* .button-secondary {
+    display: flex;
+    height: 54px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 14px;
+    background: #FFF;
+  } */
+
+ p{
+    color: #BBB;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 133.333% */
+
+    padding: 16px;
+
+}
+
+.h3 {
+    color: #FFF;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    padding: 16px;
+}
+
+
+/*Fonts*/
+.roboto-thin {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: normal;
+  }
+  
+  .roboto-light {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .roboto-regular {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .roboto-medium {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+  }
+  
+  .roboto-bold {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .roboto-black {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .roboto-thin-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+  }
+  
+  .roboto-light-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    font-style: italic;
+  }
+  
+  .roboto-regular-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+  
+  .roboto-medium-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+  }
+  
+  .roboto-bold-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    font-style: italic;
+  }
+  
+  .roboto-black-italic {
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    font-style: italic;
+  }
+  

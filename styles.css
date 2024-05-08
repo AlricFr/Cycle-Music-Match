@@ -115,6 +115,7 @@
     /* align-self: auto; */
     margin: auto;
     cursor: pointer;
+    text-decoration: none;
 
     border: 0px;
     border-radius: 14px;
@@ -141,6 +142,18 @@
     border-radius: 14px;
     background: #FFF;
   } */
+
+  .inputField {
+    color: white;
+    border: 2px solid var(--main-button-color);
+    margin: 20px;
+    border-radius: 10px;
+    padding: 10px 25px;
+    background: transparent;
+    width: 60%;
+  }
+  
+  
 
  p{
     color: #BBB;

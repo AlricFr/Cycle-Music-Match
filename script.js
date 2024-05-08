@@ -4,7 +4,6 @@ const importBtn = document.querySelector(".button-main"),
 
 importBtn.addEventListener("click", ()=> {importBtn.classList.toggle("import"); populateList()});    
 
-// Fetch Spotify Data
 
 
 // Define a constant list of playlists

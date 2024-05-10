@@ -2,8 +2,7 @@
 const AUTHORIZE = "https://accounts.spotify.com/authorize";
 const TOKEN = "https://accounts.spotify.com/api/token";
 const REDIRECT_URI = "http://127.0.0.1:5500/SignIn.html";
-const CLIENT_ID = localStorage.getItem("client_id");
-const CLIENT_SECRET = localStorage.getItem("client_secret");
+const CLIENT_ID = 'f025bd23871b4827a30382a923a7eeba';
 
 // Async function for page load
 async function onPageLoad() {

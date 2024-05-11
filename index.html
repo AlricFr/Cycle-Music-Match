@@ -1,11 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Example of the Authorization Code with PKCE flow with Spotify</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <p>Hello World!</p>
+    
+  <div id="main"></div>
+  <div id="oauth"></div>
+
+  <template id="login">
+    <h1>Cycling Music Match</h1>
+    <p>By connecting Cycling Music Match to Spotify, the curated playlist will be based on your taste and will be available directly in your Spotify Library.</p>
+    <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> Log in with Spotify </button>
+  </template>
+
+
+  <template id="playlist-select">
+    <h3 class="h3">Choose your inspiration</h3>
+        <p>By selecting one or more playlists you control aspects like artist & genre for the new playlist.</p>   
+
+    
+    <div>
+        <button class="button-main">Continue</button>
+        <button id="logout-button" class="button-secondary" data-bind-onclick="logoutClick()">Logout</button>
+    </div>
+
+  </template>
+
+  <button class="button-main" onclick="populateList()">Fill Playlists</button>
+  <ul class="list-items">
+    <li>Testing 1</li>
+    <li>Testing 2</li>
+    <li>Testing 3</li>
+  </ul>
+
+  <template id="oauth-template">
+    <h2>oAuth info</h2>
+    <table>
+      <tr>
+        <td>Access token</td>
+        <td data-bind="access_token"></td>
+      </tr>
+      <tr>
+        <td>Refresh token</td>
+        <td data-bind="refresh_token"></td>
+      </tr>
+      <tr>
+        <td>Expiration at</td>
+        <td data-bind="expires">${getExpirationDate(expires_in)}</td>
+      </tr>
+    </table>
+  </template>
+
+  <script src="script.js" type="module"></script>
 </body>
+
 </html>

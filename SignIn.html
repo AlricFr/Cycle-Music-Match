@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 
 </head>
-<body onload="onPageLoad()">
+<body>
     <header> 
         <div class="flex-container-row">
             <img src="./src/back-icon.svg">
@@ -32,10 +32,19 @@
         <label for="clientSecret" style="color: white;"> Client Secret</label> 
         <input type="text" id="clientSecret" class="inputField"> -->
        
-        <button class="button-main" onclick="requestAuthorization()">Login with Spotify</button>
+        <button class="button-main" data-bind-onclick="loginWithSpotifyClick();">Login with Spotify</button>
         <!-- <a href="SeedPlaylist.html" class="button-main"> Continue with Spotify</a> -->
     </div>
-    <script src="./authorization.js"></script>
+
+    <input id='hidden_token' style="color:white">
+    <div class="col-sm-6 form-group row mt-4 px-0">
+        <label for="Genre" style="color:white">Genre:</label>
+        <select name="" id="select_genre" style="color:white">
+            <option>Select...</option>                    
+        </select>
+    </div>
+   
+    <script src="./authorization.js" type="module"></script>
 
 
     

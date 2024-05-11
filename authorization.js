@@ -1,116 +1,99 @@
-// Define constants and endpoints
-const AUTHORIZE = "https://accounts.spotify.com/authorize";
-const TOKEN = "https://accounts.spotify.com/api/token";
-const REDIRECT_URI = "http://127.0.0.1:5500/SignIn.html";
-const CLIENT_ID = 'f025bd23871b4827a30382a923a7eeba';
+ //Tutorial: https://www.youtube.com/watch?v=SbelQW2JaDQ
 
-// Async function for page load
-async function onPageLoad() {
-    // Check if there is a code in the URL
-    if (window.location.search.length > 0) {
-        handleRedirect();
-    }
-}
 
-// Async function to handle redirect
-async function handleRedirect() {
-    const code = getCode();
-    if (code) {
-        await fetchAccessToken(code);
-    }
-    // Update URL
-    window.history.pushState("", "", REDIRECT_URI);
-}
+ // API Module
+ const APIController =(function() {
+    const clientId = '2025dd8280bb46ceb8bb28753421fbcf';
+    const clientSecret = '5825ecb69bfd408a891c4413d68ddcee';
 
-// Function to generate code_verifier and code_challenge using PKCE
-async function generateCodeChallenge() {
-    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    const randomValues = crypto.getRandomValues(new Uint8Array(64));
-    const randomString = Array.from(randomValues).map((x) => possible[x % possible.length]).join('');
+    //private methods
+    const _getToken = async () => {
 
-    const code_verifier = randomString;
-    localStorage.setItem('code_verifier', code_verifier);
-
-    const encoder = new TextEncoder();
-    const data = encoder.encode(code_verifier);
-    const hashed = await crypto.subtle.digest('SHA-256', data);
-    const code_challenge_base64 = btoa(String.fromCharCode(...new Uint8Array(hashed)))
-        .replace(/=/g, '')
-        .replace(/\+/g, '-')
-        .replace(/\//g, '_');
-
-    return { code_verifier, code_challenge_base64 };
-}
-
-// Async function to fetch access token
-async function fetchAccessToken(code) {
-    const code_verifier = localStorage.getItem('code_verifier');
-    const params = new URLSearchParams({
-        grant_type: 'authorization_code',
-        code: code,
-        redirect_uri: REDIRECT_URI,
-        client_id: CLIENT_ID,
-        code_verifier: code_verifier,
-    });
-
-    try {
-        const response = await fetch(TOKEN, {
+        const result = await fetch ('https://accounts.spotify.com/api/token', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
+                'content-type' : 'application/x-www-form-urlencoded',
+                'Authorization' : 'Basic ' + btoa(clientId + ':' + clientSecret)
             },
-            body: params,
+            body: 'grant_type=client_credentials'
         });
 
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('access_token', data.access_token);
-            localStorage.setItem('refresh_token', data.refresh_token);
-            localStorage.setItem('expires_in', data.expires_in);
-
-            // Calculate and store token expiration time
-            const now = Date.now();
-            const expires = now + data.expires_in * 1000;
-            localStorage.setItem('expires', expires);
-        } else {
-            throw new Error('Failed to fetch access token');
-        }
-    } catch (error) {
-        console.error('Error fetching access token:', error);
+        const data = await result.json();
+        return data.access_token;
     }
-}
 
-// Function to get code from URL query string
-function getCode() {
-    const queryString = window.location.search;
-    const urlParams = new URLSearchParams(queryString);
-    return urlParams.get('code');
-}
+    const _getGenres = async (token) => {
 
-// Function to request authorization
-async function requestAuthorization() {
-    // Get code challenge and verifier
-    const { code_verifier, code_challenge_base64 } = await generateCodeChallenge();
+        const result = await fetch(`https://api.spotify.com/v1/browse/categories`, {
+            method: 'GET',
+            headers: {'Authorization' : 'Bearer ' + token}
+        });             
 
-    // Save code_verifier
-    localStorage.setItem('code_verifier', code_verifier);
+        const data = await result.json()
+        console.log(data);
+        return data.categories.items;
+    }
 
-    // Build the authorization URL
-    const url = new URL(AUTHORIZE);
-    const params = {
-        response_type: 'code',
-        client_id: CLIENT_ID,
-        redirect_uri: REDIRECT_URI,
-        scope: 'user-read-email playlist-read-private user-library-modify playlist-modify-private',
-        code_challenge: code_challenge_base64,
-        code_challenge_method: 'S256',
-    };
+    return {
+        getToken() {
+            return _getToken();
+        },
+        getGenres() {
+            return _getGenres();
+        }
+    }
 
-    url.search = new URLSearchParams(params).toString();
+ })();
 
-    // Redirect user to the authorization URL
-    window.location.href = url.toString();
-}
+ // UI Module
+ const UIController = (function() {
 
-// Initialize page load
-onPageLoad();
+    //References to HTML selectors
+    const DOMElements = {
+        selectGenre: '#select_genre',
+        hfToken: '#hidden_token'
+    }
+
+    //public Methods
+    return {
+
+        inputField(){
+            return {
+                genre: document.querySelector(DOMElements.selectGenre)
+            }
+        },
+    
+
+        //Methods to create select list
+        createGenre(text, value) {
+            const html = `<option value="${value}">${text}</option>`;
+            document.querySelector(DOMElements.selectPlaylist).insertAdjacentHTML('beforeend', html);
+        },
+
+        storeToken(value) {
+            document.querySelector(DOMElements.hfToken).value = value;
+        },
+    }
+
+ })();
+
+ const APPConstroller = (function(UICtrl, APICtrl) {
+
+    const DOMInputs = UICtrl.inputField();
+
+    const loadGenres = async () => {
+        const token = await APICtrl.getToken();
+        UICtrl.storeToken(token);
+        const genres = await APICtrl.getGenres(token);
+        genres.forEach(element => UICtrl.createGenre(element.name, element.id));
+    }
+
+    return {
+        init() {
+            console.log('App is starting');
+            loadGenres();
+        }
+    }
+ })(UIController, APIController);
+
+ APPConstroller.init();

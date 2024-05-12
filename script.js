@@ -12,7 +12,10 @@ const redirectUrl = 'http://127.0.0.1:5500/index.html';        // your redirect 
 
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
-const scope = 'user-read-private user-read-email playlist-read-private';
+const currentUserPlaylists = "https://api.spotify.com/v1/me/playlists";
+const scope = 'user-read-private user-read-email playlist-read-private playlist-modify-private playlist-modify-public';
+
+
 
 // Data structure that manages the current active token, caching it in localStorage
 const currentToken = {
@@ -53,11 +56,64 @@ if (code) {
 // If we have a token, we're logged in, so fetch user data and render logged in template
 if (currentToken.access_token) {
   const userData = await getUserData();
+  // console.log(userData);
   const userPlaylists = await getUserPlaylists();
+  const genres = await getGenres();
+  const genreObj = genres.genres;
+  // console.log(genreObj);
   renderTemplate("main", "playlist-select", userData);
-  console.log(userPlaylists);
+  // console.log("userPlaylist");
+  // console.log(userPlaylists);
+  const obj = userPlaylists.items;
+  // obj.forEach(playlist => console.log(playlist.name));
+
+  //Creates Genre Select List
+  const selectGenre = document.getElementById("genre-list");
+  genreObj.forEach((item) => {
+    const selectItem = document.createElement("option");
+    selectItem.value = item;
+    selectItem.textContent = item;
+    // console.log(selectItem);
+    selectGenre.appendChild(selectItem);
+  });
+
+  //Creating a new Playlist with the selected genre
+  const genreList = document.getElementById("genre-list");
+  console.log(genreList);
+
+  // Get the index of the selected option
+  const selectedIndex = genreList.selectedIndex;
+
+  // Get the selected option element
+  const selectedOption = genreList.options[selectedIndex];
+
+  // Get the value and text of the selected option
+  const selectedValue = selectedOption.value;
+  const selectedText = selectedOption.textContent;
+
+  // Log the selected value and text
+  console.log("Selected value:", selectedValue);
+  console.log("Selected text:", selectedText);
+
+  //Creating new Playlist with selected Value
+  const newPlaylist = await createPlaylist("New Playlist", selectedValue);
+
+
+  //*** Used this to create a list of the current users playlist in HTML */
+  // const listContainer = document.getElementById("list-items");
+  // console.log(listContainer);
+  //   obj.forEach((item) => {
+  //     const listItem = document.createElement("li", "class=item");
+  //     listItem.textContent = item.name;
+
+  //     listContainer.appendChild(listItem);
+  // });
+
+  // console.log(obj);
   renderTemplate("oauth", "oauth-template", currentToken);
 }
+
+
 
 // Otherwise we're not logged in, so render the login template
 if (!currentToken.access_token) {
@@ -141,27 +197,74 @@ async function getUserData() {
 }
 
 async function getUserPlaylists() {
-    const response = await fetch("https://api.spotify.com/v1/me/playlists", {
+    const response = await fetch(currentUserPlaylists, {
       method: 'GET',
       headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
     });
   
     console.log(response);
-    // let obj = JSON.parse(response);
-
-    // console.log(response.items);
-    // const items = response.items();
-    // const listContainer = document.getElementById(".list-items");
-    // items.forEach((item) => {
-    //   const listItem = document.createElement("li");
-    //   listItem.textContent = item.name;
-
-    //   listContainer.appendChild(listItem);
-    // });
-
-    
+       
     return await response.json();
   }
+
+async function getGenres(){
+  const response = await fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds",{
+    method: 'GET',
+    headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
+  });
+
+  return await response.json();
+}
+
+
+async function createPlaylist(name, genreSeed) {
+  const userData = await getUserData();
+  console.log(userData);
+  const userID = userData.id;
+  console.log(userID);
+
+  // creating a new playlist, temporary disabled
+  const response = await fetch(
+    "https://api.spotify.com/v1/users/speedjunkee/playlists",
+    {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + currentToken.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        description: "This is an auto-generated playlist",
+        public: "false",
+      }),
+    }
+  );
+
+  //get playlist ID of the just created Playlist
+  let allPlaylists = await getUserPlaylists();
+  console.log("This is the created playlist object");
+  console.log(allPlaylists);
+  allPlaylists = allPlaylists.items;
+  console.log(allPlaylists);
+  const truePlaylist = allPlaylists[0].id;
+  console.log(truePlaylist);
+  // const truePlaylist = "4ddkw1vdR49SjKeSxuyER9"
+
+  //add a cool song to that Playlist
+  const trackResponse = await fetch(`https://api.spotify.com/v1/playlists/${truePlaylist}/tracks`,{
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + currentToken.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        uris: ['spotify:track:3kiTnvHHKipoAwa40GTGGy'] ,
+        position: 0,
+      }),
+    }
+  );
+}
+  
 
 
 // Click handlers

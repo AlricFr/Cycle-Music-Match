@@ -4,6 +4,7 @@
 <head>
   <title>Example of the Authorization Code with PKCE flow with Spotify</title>
   <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
@@ -30,12 +31,10 @@
 
   </template>
 
-  <button class="button-main" onclick="populateList()">Fill Playlists</button>
-  <ul class="list-items">
-    <li>Testing 1</li>
-    <li>Testing 2</li>
-    <li>Testing 3</li>
+  <button class="button-main" onclick="createNewPlaylist()">Create New Playlist</button>
+  <ul class="list-items" id="list-items">
   </ul>
+  <select id="genre-list" class="list-items"> </select>
 
   <template id="oauth-template">
     <h2>oAuth info</h2>

@@ -3,6 +3,7 @@
   padding: 0;
   Box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+  color: var(--main-text-color);
 
   --main-background-color: #292E32;
   --main-text-color: #FFFFFF;
@@ -60,6 +61,80 @@ button {
   background: var(--main-button-color);
 }
 
+
+.list-items {
+  /* Define the list layout, spacing, and styles */
+  list-style: none; /* Remove default list styling */
+  padding: 20px; /* Remove default padding */
+  margin: auto; /* Remove default margin */
+  width: 60%;
+  display: block;
+  
+}
+
+/* CSS for each list item */
+.item {
+  /* Define display and layout styles */
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between elements inside the item */
+  padding: 10px 16px; /* Padding inside the item */
+  margin: 10px;
+  border-radius: 8px; /* Rounded corners for the item */
+  border: 2px solid var(--secondary-button-color); /* Grey border for the item */
+  cursor: pointer; /* Pointer cursor on hover */
+  height: 54px;
+  
+  /* Define hover effect for each item */
+  transition: border 0.3s; /* Smooth transition for border color change */
+  &:hover {
+      border: 2px solid var(--main-button-color); /* Change border color to blue on hover */
+  }
+}
+
+.item.active {
+  border-color: var(--main-button-color);
+}
+
+.item.active .checkbox{
+  background-color: var(--main-button-color);
+  border-color: var(--main-button-color);
+}
+
+.item.active .check-icon{
+  background-color: var(--main-button-color);
+  transform: scale(1);
+}
+
+/* CSS for the text inside each list item */
+.item-text {
+  /* Define text styles */
+  color: #FFF; /* Text color */
+  font-size: 16px; /* Text size */
+  line-height: normal; /* Line height */
+}
+
+.checkbox {
+  /* Define the size of the circle */
+  width: 24px;
+  height: 24px;
+  
+  /* Make the element circular */
+  border-radius: 50%;
+  
+  /* Add a grey border with 2px thickness */
+  border: 2px solid var(--secondary-button-color);
+  
+  /* Display settings */
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  
+}
+
+.check-icon {
+  transform: scale(0);
+}
 
 tr:nth-child(even) {
   background-color: #eee;

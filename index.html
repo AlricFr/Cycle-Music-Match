@@ -10,38 +10,72 @@
 <body>
   <script src="script.js" type="module"></script>
   <script src="businessLogic.js" type="module"></script> 
+
   <div id="main"></div>
   <div id="playlist"></div>
   <div id="oauth"></div>
 
+  <!-- Landing page template with forward to autorization with spotify-->
   <template id="login">
     <h1>Cycling Music Match</h1>
     <p>By connecting Cycling Music Match to Spotify, the curated playlist will be based on your taste and will be available directly in your Spotify Library.</p>
     <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> Log in with Spotify </button>
   </template>
-
-
+  
+  <!-- Selecting Playlist Parameters-->
   <template id="playlist-select">
     <h3 class="h3">Choose your inspiration</h3>
-        <p>By selecting one or more playlists you control aspects like artist & genre for the new playlist.</p>   
+        <p>By selecting a genre and artist, you control the music added to the new playlist.</p>   
 
+        <h4>Genres</h4>
+          <ul id="genre-list" class="card-container"></ul>
+
+        <h4>Artists</h4>
+        <div id="artist-list" class="card-container">
+          <!-- <div class="card">
+            <div class="card-image-container">
+              <img src="https://i.scdn.co/image/ab6761610000f17834c7d5d19d5891e35522362e">
+            </div>
+            <p class="card-title">Reclam Hörbücher Longer Artist Name</p>
+          </div>
+          <div class="card">
+            <div class="card-image-container">
+              <img src="https://i.scdn.co/image/ab6761610000f17834c7d5d19d5891e35522362e">
+            </div>
+            <p class="card-title">Reclam Hörbücher</p>
+          </div>
+          <div class="card">
+            <div class="card-image-container">
+              <img src="https://i.scdn.co/image/ab6761610000f17834c7d5d19d5891e35522362e">
+            </div>
+            <p class="card-title">Reclam Hörbücher</p>
+          </div> -->
+        </div>
+        
+
+        
     
-    <div>
-        <button class="button-main">Continue</button>
+    <div class="button-container">
+        <button class="button-main">Preview Playlist</button>
         <button id="logout-button" class="button-secondary" data-bind-onclick="logoutClick()">Logout</button>
     </div>
 
   </template>
 
-  <template id="playlist-create">
-      <button class="button-main" data-bind-onclick="createPlaylist('TestingButton')">Create New Playlist</button>
+  <!-- Review & save Playlist-->
+  <template id="playlist-review">
+    <!-- needs scrollable list of tracks currently considered for the playlist-->
+    <!-- needs button to continue & button to regenerate-->
   </template>
 
-  <!-- <button class="button-main" data-bind-onclick="createPlaylist('TestingButton')">Create New Playlist</button> -->
-  <!-- <button class="button-main" onclick="createPlaylist('Testing Button')" >Create New Playlist</button> -->
-  <ul class="list-items" id="list-items">
-  </ul>
-  <select id="genre-list" class="list-items"> </select>
+
+  <template id="playlist-create">
+    <!-- needs a field to enter a name & take over the name to the playlist-->  
+    <button class="button-main" data-bind-onclick="createPlaylist('TestPlaylist')">Create Playlist</button>
+  </template>
+
+  
+
 
   <template id="oauth-template">
     <h2>oAuth info</h2>

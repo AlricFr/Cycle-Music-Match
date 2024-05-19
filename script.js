@@ -1,8 +1,8 @@
 // script.js
 
 import { redirectToSpotifyAuthorize, loginWithSpotifyClick, logoutClick, refreshTokenClick, renderTemplate } from './uiHandler.js';
-import { createPlaylist } from './businessLogic.js';
-import { getToken, refreshToken, getUserData, getUserPlaylists, getGenres } from './apiHandler.js';
+import { getToken, refreshToken, getUserData, getUserPlaylists, getGenres, getFollowedArtists, getRecommendation } from './apiHandler.js';
+import { buildURI } from './businessLogic.js';
 
 
 // should be in API Handler -> here only a getCurrentToken function should be called
@@ -49,17 +49,63 @@ if (currentToken.access_token) {
   const userPlaylists = await getUserPlaylists();
   const genres = await getGenres();
   const genreObj = genres.genres;
+  // console.log("GenreObj");
+  // console.log(genreObj);
   renderTemplate("main", "playlist-select", userData);
   renderTemplate("playlist", "playlist-create", userData);
-  const obj = userPlaylists.items;
-  const selectGenre = document.getElementById("genre-list");
-  genreObj.forEach((item) => {
-    const selectItem = document.createElement("option");
-    selectItem.value = item;
-    selectItem.textContent = item;
-    selectGenre.appendChild(selectItem);
-  });
-  renderTemplate("oauth", "oauth-template", currentToken);
+  // const obj = userPlaylists.items;
+  // const selectGenre = document.getElementById("genre-list");
+  // genreObj.forEach((item) => {
+  //   const selectItem = document.createElement("li");
+  //   selectItem.value = item;
+  //   selectItem.textContent = item;
+  //   selectItem.classList.add("card");
+  //   selectGenre.appendChild(selectItem);
+  // });
+
+  const userFollowedArtists = await getFollowedArtists();
+  console.log(userFollowedArtists);
+  const artistsObj  =userFollowedArtists.artists.items;
+  console.log("ArtistsObj");
+  console.log(artistsObj);
+  
+  // Below fills the artist list which I turned off to focus on working with recommendations to funnel them to a new playlist
+  // const artistList = document.getElementById("artist-list");
+  // artistsObj.forEach((item) => {
+  //  // console.log(item);
+  //   const artistCard = document.createElement("div");
+  //   artistCard.classList.add("card");
+
+  //   const artistImageContainer = document.createElement("div");
+  //   artistImageContainer.classList.add("card-image-container");
+
+  //     const artistImage = document.createElement("img");
+  //     artistImage.src = item.images[2].url;
+  //     const artistName = document.createElement("p");
+  //     artistName.classList.add("card-title");
+  //     artistName.textContent =item.name;
+    
+  //   //artistCard.textContent = item.name;
+    
+    
+    
+  //   artistCard.appendChild(artistImage);
+  //   artistCard.appendChild(artistName);
+    
+  //   artistList.appendChild(artistCard);
+
+  // })
+
+  //Below is transfered to businessLogic.js inside the create Playlist function
+  // const recommendations = await getRecommendation();
+  // const recommendationObj = await recommendations.tracks;
+  // console.log("Recommendations:");
+  // console.log(recommendations);
+  // console.log("Recommendation Obj:");
+  // console.log(recommendationObj);
+
+  // buildURI(recommendationObj);
+  // renderTemplate("oauth", "oauth-template", currentToken);
 }
 
 // Otherwise we're not logged in, so render the login template

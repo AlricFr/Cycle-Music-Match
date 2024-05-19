@@ -1,6 +1,6 @@
 // businessLogic.js
 
-import { getUserData, getUserPlaylists } from "./apiHandler.js";
+import { getUserData, getUserPlaylists, getRecommendation } from "./apiHandler.js";
 import { currentToken } from "./script.js";
 
 async function createPlaylist(name) {
@@ -29,7 +29,21 @@ async function createPlaylist(name) {
     let allPlaylists = await getUserPlaylists();
     allPlaylists = allPlaylists.items;
     const truePlaylist = allPlaylists[0].id;
+    // console.log("TruePlaylist"+truePlaylist);
   
+    //gotta fetch recommendations here to hand over as trackArray
+    const recommendations = await getRecommendation();
+    const recommendationObj = await recommendations.tracks;
+    console.log("RecommendationObject");
+    console.log(recommendationObj);
+    const uri = await buildURI(recommendationObj);
+    // const uri = ["spotify:track:2aibwv5hGXSgw7Yru8IYTO",
+    //               "spotify:track:0wJ2epgYbxJEkaEYfONaon",
+    //               "spotify:track:5H6Jp0syB5yEPk7SWYdlmk"
+    // ];
+    console.log(uri);
+    
+    console.log(JSON.stringify({uris: uri, position: 0,}))
     // Add a song to the playlist
     const trackResponse = await fetch(`https://api.spotify.com/v1/playlists/${truePlaylist}/tracks`, {
       method: "POST",
@@ -38,11 +52,26 @@ async function createPlaylist(name) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        uris: ['spotify:track:3kiTnvHHKipoAwa40GTGGy'],
-        position: 0,
+        uris: uri,
+        position: 0
       }),
     });
   }
   
-  export { createPlaylist };
+async function buildURI(trackArray){
+  console.log("Track Array Log");
+  console.log(trackArray);
+  let uri = [];
+  trackArray.forEach(track => {
+    const id = track.id;
+    // console.log("TrackID " + id);
+    // uri += "spotify:track:"+id+","
+    uri.push("spotify:track:"+id);
+    // console.log(uri);
+  });
+
+  return uri;
+}
+
+  export { createPlaylist, buildURI };
   

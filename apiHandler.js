@@ -7,7 +7,7 @@ const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - m
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
 const currentUserPlaylists = "https://api.spotify.com/v1/me/playlists";
-const scope = 'user-read-private user-read-email playlist-read-private playlist-modify-private playlist-modify-public';
+const scope = 'user-read-private user-read-email playlist-read-private playlist-modify-private playlist-modify-public user-follow-read';
 
 async function getToken(code) {
   const code_verifier = localStorage.getItem('code_verifier');
@@ -72,6 +72,30 @@ async function getGenres() {
   return await response.json();
 }
 
+//parameters need to be refined, prob. best to hand in an array with potentially empty fields than handing over single arguments
+async function getRecommendation() {
+  // const seedArtists = null;
+  const seedGenre = "work-out";
+  // const seedTracks = null;
+
+  // const url = `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtists}&seed_genres=${seedGenre}&seed_tracks=${seedTracks}`;
+  const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${seedGenre}`;
+
+  console.log("URL: " + url);
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: "Bearer " + currentToken.access_token,
+    },
+  });
+
+  // console.log("Recommendation");
+  // console.log(response);
+  return await response.json();
+}
+
+
+
 async function getAuthorizationURL(){
   const possible =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -112,4 +136,14 @@ function getRedirectUrl(){
   return redirectUrl;
 }
 
-export { getToken, refreshToken, getUserData, getUserPlaylists, getGenres, getAuthorizationURL, getRedirectUrl };
+async function getFollowedArtists(){
+  const response = await fetch('https://api.spotify.com/v1/me/following?type=artist', {
+    method: 'GET',
+    headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
+  });
+  console.log("artists");
+  console.log(response);
+  return await response.json();
+}
+
+export { getToken, refreshToken, getUserData, getUserPlaylists, getGenres, getAuthorizationURL, getRedirectUrl, getFollowedArtists, getRecommendation };

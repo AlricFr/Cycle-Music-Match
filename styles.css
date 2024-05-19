@@ -6,6 +6,7 @@
   color: var(--main-text-color);
 
   --main-background-color: #292E32;
+  --secondary-background-color: #777;
   --main-text-color: #FFFFFF;
   --secondary-text-color: #BBB;
 
@@ -43,24 +44,105 @@ p {
 button {
   display: flex;
   height: 54px;
-  color: var(--main-text-color);
   justify-content: center;
   align-items: center;
-  margin: 20px;
+  margin: 20px 8px;
   cursor: pointer;
   text-decoration: none;
+  width: 60%;
+
+  color: var(--main-text-color);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
 
   border: 0px;
   border-radius: 14px;
   height: 54px;
-  width: 60%;
 
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
   background: var(--main-button-color);
 }
 
+.button-main {
+  
+ 
+}
+
+.button-secondary {
+  background: var(--main-background-color);
+  border-color: var (--main-button-color);
+  border: solid 2px;
+  width: 30%;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+}
+
+/* .card {
+  flex: 0 0 300px;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  background: var(--secondary-background-color);
+  position: relative;
+  margin: 8px;
+  padding: 8px;
+  border: 2px solid var(--main-button-color);
+  transition: 0.5s ease-out;
+  overflow: visible;
+  place-content: center;
+  cursor: pointer;
+  background-color: var(--secondary-background-color);
+} */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 230px;
+  height: 280px;
+  max-height: 330px;
+  background-color: var(--secondary-background-color);
+  border-radius: 10px;
+  box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.08),
+    -4px -4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 10px;
+  margin: 8px;
+}
+
+.card-container{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card-image-container {
+  width: 100%;
+  height: 64%;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  /* background-color: rgb(165, 165, 165); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--secondary-background-color);
+}
+
+.card-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 600;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: -webkit-box;
+  background-color: var(--secondary-background-color);
+  color: var(--main-text-color);
+}
 
 .list-items {
   /* Define the list layout, spacing, and styles */

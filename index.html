@@ -8,8 +8,10 @@
 </head>
 
 <body>
-    
+  <script src="script.js" type="module"></script>
+  <script src="businessLogic.js" type="module"></script> 
   <div id="main"></div>
+  <div id="playlist"></div>
   <div id="oauth"></div>
 
   <template id="login">
@@ -31,7 +33,12 @@
 
   </template>
 
-  <button class="button-main" onclick="createNewPlaylist()">Create New Playlist</button>
+  <template id="playlist-create">
+      <button class="button-main" data-bind-onclick="createPlaylist('TestingButton')">Create New Playlist</button>
+  </template>
+
+  <!-- <button class="button-main" data-bind-onclick="createPlaylist('TestingButton')">Create New Playlist</button> -->
+  <!-- <button class="button-main" onclick="createPlaylist('Testing Button')" >Create New Playlist</button> -->
   <ul class="list-items" id="list-items">
   </ul>
   <select id="genre-list" class="list-items"> </select>
@@ -54,7 +61,7 @@
     </table>
   </template>
 
-  <script src="script.js" type="module"></script>
+  
 </body>
 
 </html>

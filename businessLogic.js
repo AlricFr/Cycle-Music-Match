@@ -1,12 +1,16 @@
 // businessLogic.js
 
-async function createPlaylist(name, genreSeed) {
-    const userData = await getUserData();
+import { getUserData, getUserPlaylists } from "./apiHandler.js";
+import { currentToken } from "./script.js";
+
+async function createPlaylist(name) {
+  console.log("Create Playlist Button Clicked");  
+  const userData = await getUserData();
     const userID = userData.id;
   
-    // Creating a new playlist
+
     const response = await fetch(
-      "https://api.spotify.com/v1/users/speedjunkee/playlists",
+      `https://api.spotify.com/v1/users/${userID}/playlists`,
       {
         method: "POST",
         headers: {

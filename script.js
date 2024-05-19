@@ -5,7 +5,7 @@ import { createPlaylist } from './businessLogic.js';
 import { getToken, refreshToken, getUserData, getUserPlaylists, getGenres } from './apiHandler.js';
 
 
-
+// should be in API Handler -> here only a getCurrentToken function should be called
 // Data structure that manages the current active token, caching it in localStorage
 const currentToken = {
   get access_token() { return localStorage.getItem('access_token') || null; },
@@ -42,6 +42,7 @@ if (code) {
   window.history.replaceState({}, document.title, updatedUrl);
 }
 
+
 // If we have a token, we're logged in, so fetch user data and render logged in template
 if (currentToken.access_token) {
   const userData = await getUserData();
@@ -49,6 +50,7 @@ if (currentToken.access_token) {
   const genres = await getGenres();
   const genreObj = genres.genres;
   renderTemplate("main", "playlist-select", userData);
+  renderTemplate("playlist", "playlist-create", userData);
   const obj = userPlaylists.items;
   const selectGenre = document.getElementById("genre-list");
   genreObj.forEach((item) => {

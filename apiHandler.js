@@ -83,6 +83,8 @@ async function getRecommendation() {
   // const seedArtists = null;
   //const seedGenre = "work-out";
   const seedGenre = getSelectedGenre();
+  console.log("Selected Genre");
+  console.log(seedGenre);
   // const seedTracks = null;
 
   // const url = `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtists}&seed_genres=${seedGenre}&seed_tracks=${seedTracks}`;

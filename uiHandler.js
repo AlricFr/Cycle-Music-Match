@@ -63,11 +63,11 @@ function renderTemplate(targetId, templateId, data = null) {
   target.appendChild(clone);
 }
 
-async function getSelectedGenre() {
+function getSelectedGenre() {
   var selectedIndex = document.getElementById("genre-list").selectedIndex;
   var options = document.getElementById("genre-list").options;
   var selectedOption = options[selectedIndex].text;
-  
+
   return selectedOption;
 }
 

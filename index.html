@@ -30,14 +30,15 @@
         <h4>Genres</h4>
           <select id="genre-list" class="card-container"></select>
 
-        <h4>Artists</h4>
-        <div id="artist-list" class="card-container"></div>
+        <!-- <h4>Artists</h4>
+        <div id="artist-list" class="card-container"></div> -->
         
 
         
     
     <div class="button-container">
-        <button class="button-main">Preview Playlist</button>
+        <!-- <button class="button-main">Preview Playlist</button> -->
+        <button class="button-main" data-bind-onclick="createPlaylist('TestPlaylist')">Create Playlist</button>
         <button id="logout-button" class="button-secondary" data-bind-onclick="logoutClick()">Logout</button>
     </div>
 
@@ -52,7 +53,7 @@
 
   <template id="playlist-create">
     <!-- needs a field to enter a name & take over the name to the playlist-->  
-    <button class="button-main" data-bind-onclick="createPlaylist('TestPlaylist')">Create Playlist</button>
+    <!-- <button class="button-main" data-bind-onclick="createPlaylist('TestPlaylist')">Create Playlist</button> -->
   </template>
 
   

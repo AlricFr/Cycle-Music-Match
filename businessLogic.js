@@ -2,12 +2,14 @@
 
 import { getUserData, getUserPlaylists, getRecommendation } from "./apiHandler.js";
 import { currentToken } from "./script.js";
+import { getSelectedGenre } from "./uiHandler.js";
 
 async function createPlaylist(name) {
   console.log("Create Playlist Button Clicked");  
   const userData = await getUserData();
-    const userID = userData.id;
-  
+  const userID = userData.id;
+  name = name + "-"+getSelectedGenre();
+  console.log("This is the Playlist name " + name);
 
     const response = await fetch(
       `https://api.spotify.com/v1/users/${userID}/playlists`,
@@ -29,7 +31,7 @@ async function createPlaylist(name) {
     let allPlaylists = await getUserPlaylists();
     allPlaylists = allPlaylists.items;
     const truePlaylist = allPlaylists[0].id;
-    // console.log("TruePlaylist"+truePlaylist);
+    console.log("TruePlaylist"+truePlaylist);
   
     //gotta fetch recommendations here to hand over as trackArray
     const recommendations = await getRecommendation();

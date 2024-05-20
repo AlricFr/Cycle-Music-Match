@@ -1,5 +1,5 @@
 // uiHandler.js
-import { getAuthorizationURL, getRedirectUrl } from "./apiHandler.js";
+import { getAuthorizationURL, getRedirectUrl, getGenres } from "./apiHandler.js";
 import { createPlaylist } from './businessLogic.js';
 
 async function redirectToSpotifyAuthorize() {
@@ -63,10 +63,19 @@ function renderTemplate(targetId, templateId, data = null) {
   target.appendChild(clone);
 }
 
+async function getSelectedGenre() {
+  var selectedIndex = document.getElementById("genre-list").selectedIndex;
+  var options = document.getElementById("genre-list").options;
+  var selectedOption = options[selectedIndex].text;
+  
+  return selectedOption;
+}
+
 export {
   redirectToSpotifyAuthorize,
   loginWithSpotifyClick,
   logoutClick,
   refreshTokenClick,
   renderTemplate,
+  getSelectedGenre
 };

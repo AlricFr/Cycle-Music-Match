@@ -1,10 +1,11 @@
 // apiHandler.js
 import { currentToken } from "./script.js";
+import { getSelectedGenre } from "./uiHandler.js";
 
 // Constants
 const clientId = 'f025bd23871b4827a30382a923a7eeba'; // your clientId
-// const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
-const redirectUrl = 'https://alricfr.github.io/Cycle-Music-Match/'; // your redirect URL - must be localhost URL and/or HTTPS
+const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
+//const redirectUrl = 'https://alricfr.github.io/Cycle-Music-Match/'; // your redirect URL - must be localhost URL and/or HTTPS
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
 const currentUserPlaylists = "https://api.spotify.com/v1/me/playlists";
@@ -65,18 +66,23 @@ async function getUserPlaylists() {
 }
 
 async function getGenres() {
-  const response = await fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
-    method: 'GET',
-    headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
-  });
-
-  return await response.json();
+  console.log("Called the getGenre Method - only static genres to reduce API calls");
+  // Enable below if all genres would be needed 
+  // const response = await fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
+  //   method: 'GET',
+  //   headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
+  // });
+  const response = {"genres": ["alternative", "samba", "hip-hop", "classic", "rock", "afrobeat", "club", "deep-house", "drum-and-bass","electro","hard-rock","power-pop", "techno"]};
+  console.log(response);
+  //return await response.json();
+  return response;
 }
 
 //parameters need to be refined, prob. best to hand in an array with potentially empty fields than handing over single arguments
 async function getRecommendation() {
   // const seedArtists = null;
-  const seedGenre = "work-out";
+  //const seedGenre = "work-out";
+  const seedGenre = getSelectedGenre();
   // const seedTracks = null;
 
   // const url = `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtists}&seed_genres=${seedGenre}&seed_tracks=${seedTracks}`;

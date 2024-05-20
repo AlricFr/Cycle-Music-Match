@@ -53,21 +53,21 @@ if (currentToken.access_token) {
   // console.log(genreObj);
   renderTemplate("main", "playlist-select", userData);
   renderTemplate("playlist", "playlist-create", userData);
-  // const obj = userPlaylists.items;
-  // const selectGenre = document.getElementById("genre-list");
-  // genreObj.forEach((item) => {
-  //   const selectItem = document.createElement("li");
-  //   selectItem.value = item;
-  //   selectItem.textContent = item;
-  //   selectItem.classList.add("card");
-  //   selectGenre.appendChild(selectItem);
-  // });
+  //const obj = userPlaylists.items;
+  const selectGenre = document.getElementById("genre-list");
+  genreObj.forEach((item) => {
+    const selectItem = document.createElement("option");
+    selectItem.value = item;
+    selectItem.textContent = item;
+    //selectItem.classList.add("card");
+    selectGenre.appendChild(selectItem);
+  });
 
-  const userFollowedArtists = await getFollowedArtists();
-  console.log(userFollowedArtists);
-  const artistsObj  =userFollowedArtists.artists.items;
-  console.log("ArtistsObj");
-  console.log(artistsObj);
+  // const userFollowedArtists = await getFollowedArtists();
+  // console.log(userFollowedArtists);
+  // const artistsObj  =userFollowedArtists.artists.items;
+  // console.log("ArtistsObj");
+  // console.log(artistsObj);
   
   // Below fills the artist list which I turned off to focus on working with recommendations to funnel them to a new playlist
   // const artistList = document.getElementById("artist-list");

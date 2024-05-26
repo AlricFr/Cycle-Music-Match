@@ -1,7 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  Box-sizing: border-box;
+:root {
+  /* Box-sizing: border-box; */
   font-family: 'Roboto', sans-serif;
   color: var(--main-text-color);
 
@@ -14,59 +12,64 @@
   --secondary-button-color: #777;
   background-color: var(--main-background-color);
 
+  /*fontsizes*/
+  --fs-xl: 6rem; 
+  --fs-600: 2.5rem;
+  --fs-500: 2rem;
+  --fs-400: 1.5rem;
+
 }
 
+
+
+/* 
 body {
   margin: 1rem;
-}
+  background-color: orange;
+} */
 
 h1 {
   color: #FFF;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  font-size: var(--fs-xl);
+  text-align: left;
+  min-height: 3.25rem;
+  padding: 1.25rem;
 
-  padding: 16px;
 }
 
 p {
   color: var(--secondary-text-color);
-  font-size: 15px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  /* 133.333% */
-  padding: 16px;
+  font-size: var(--fs-600);
+  padding: 1.25rem;
+  /* margin: 1.25rem; */
 
 }
 
 button {
   display: flex;
-  height: 54px;
+  height: var(--fs-xl);
   justify-content: center;
   align-items: center;
   margin: 20px 8px;
   cursor: pointer;
-  text-decoration: none;
-  width: 60%;
+  
+  max-width: 60%;
 
   color: var(--main-text-color);
-  font-size: 16px;
-  font-style: normal;
+  font-size: var(--fs-600);
   font-weight: 600;
 
   border: 0px;
   border-radius: 14px;
-  height: 54px;
-
+  padding: 1.25rem;
+  
   background: var(--main-button-color);
 }
 
-.button-main {
+/* .button-main {
   
  
-}
+} */
 
 .button-secondary {
   background: var(--main-background-color);
@@ -80,22 +83,6 @@ button {
   flex-direction: row;
 }
 
-/* .card {
-  flex: 0 0 300px;
-  width: 300px;
-  height: 300px;
-  border-radius: 10px;
-  background: var(--secondary-background-color);
-  position: relative;
-  margin: 8px;
-  padding: 8px;
-  border: 2px solid var(--main-button-color);
-  transition: 0.5s ease-out;
-  overflow: visible;
-  place-content: center;
-  cursor: pointer;
-  background-color: var(--secondary-background-color);
-} */
 
 .card {
   display: flex;
@@ -232,8 +219,8 @@ td {
   margin-right: 1rem;
 }
 
-
+/* 
 
 #logged-in {
   display: none;
-}
+} */

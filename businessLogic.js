@@ -2,13 +2,14 @@
 
 import { getUserData, getUserPlaylists, getRecommendation } from "./apiHandler.js";
 import { currentToken } from "./script.js";
-import { getSelectedGenre } from "./uiHandler.js";
+import { getSelectedGenre, getPlaylistName } from "./uiHandler.js";
 
-async function createPlaylist(name) {
+async function createPlaylist() {
   console.log("Create Playlist Button Clicked");  
   const userData = await getUserData();
   const userID = userData.id;
-  name = name + "-"+getSelectedGenre();
+  const name = getPlaylistName();
+  // name = name + "-"+getSelectedGenre();
   console.log("This is the Playlist name " + name);
 
     const response = await fetch(

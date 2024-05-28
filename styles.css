@@ -13,10 +13,11 @@
   background-color: var(--main-background-color);
 
   /*fontsizes*/
-  --fs-xl: 6rem; 
+  --fs-xl: 5rem; 
   --fs-600: 2.5rem;
-  --fs-500: 2rem;
-  --fs-400: 1.5rem;
+  /* --fs-500: 1.5rem; */
+  --fs-500: 16px;
+  --fs-400: 1.25rem;
 
 }
 
@@ -37,9 +38,18 @@ h1 {
 
 }
 
+h2 {
+  color: #FFF;
+  font-size: var(--fs-600);
+  text-align: left;
+  min-height: 3.25rem;
+  padding: 1.25rem;
+
+}
+
 p {
   color: var(--secondary-text-color);
-  font-size: var(--fs-600);
+  font-size: var(--fs-500);
   padding: 1.25rem;
   /* margin: 1.25rem; */
 
@@ -47,7 +57,7 @@ p {
 
 button {
   display: flex;
-  height: var(--fs-xl);
+  height: var(--fs-500);
   justify-content: center;
   align-items: center;
   margin: 20px 8px;
@@ -56,7 +66,7 @@ button {
   max-width: 60%;
 
   color: var(--main-text-color);
-  font-size: var(--fs-600);
+  font-size: var(--fs-500);
   font-weight: 600;
 
   border: 0px;
@@ -83,6 +93,15 @@ button {
   flex-direction: row;
 }
 
+.select-list {
+  margin: 8px;
+  font-size: var(--fs-400);
+}
+
+.text-content{
+  margin: 8px;
+  font-size: var(--fs-400);
+}
 
 .card {
   display: flex;
@@ -102,10 +121,11 @@ button {
   margin: 8px;
 }
 
-.card-container{
+/* Don't think this is used anymore, had it for artist display */
+/* .card-container{
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
 .card-image-container {
   width: 100%;

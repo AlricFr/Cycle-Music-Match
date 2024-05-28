@@ -1,5 +1,5 @@
 // uiHandler.js
-import { getAuthorizationURL, getRedirectUrl, getGenres } from "./apiHandler.js";
+import { getAuthorizationURL, getRedirectUrl, getGenres, getDesiredPlaylistLength } from "./apiHandler.js";
 import { createPlaylist } from './businessLogic.js';
 
 async function redirectToSpotifyAuthorize() {
@@ -71,11 +71,28 @@ function getSelectedGenre() {
   return selectedOption;
 }
 
+function getSelectedRideLength(){
+  var selectedRideLength = document.getElementById("ride-length").value;
+  
+  return selectedRideLength;
+}
+
+function getPlaylistName(){
+  var name = document.getElementById("playlist-name").value;
+  if(!name){
+    name = "CMM Playlist"
+  }
+  console.log(name);
+  return name;
+}
+
 export {
   redirectToSpotifyAuthorize,
   loginWithSpotifyClick,
   logoutClick,
   refreshTokenClick,
   renderTemplate,
-  getSelectedGenre
+  getSelectedGenre,
+  getSelectedRideLength,
+  getPlaylistName
 };

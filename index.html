@@ -24,11 +24,18 @@
   
   <!-- Selecting Playlist Parameters-->
   <template id="playlist-select">
-    <h3 class="h3">Choose your inspiration</h3>
+    <h2>Choose your inspiration</h2>
         <p>By selecting a genre and artist, you control the music added to the new playlist.</p>   
 
-        <h4>Genres</h4>
-          <select id="genre-list" class="card-container"></select>
+        <h2>Genres</h2>
+          <div><select id="genre-list" class="select-list"></select></div>
+          <div>
+            <label class="text-content">Ride Length in hours</label>
+            <input type="number" class="text-content" id="ride-length"></input>
+          </div>
+          <button data-bind-onclick="getPlaylistName();" class="button-secondary">Try out Playlist Length</button>
+          <label class="text-content">Playlist Name</label>
+          <input type="text" class="text-content" id="playlist-name"></input>
 
         <!-- <h4>Artists</h4>
         <div id="artist-list" class="card-container"></div> -->
@@ -38,7 +45,7 @@
     
     <div class="button-container">
         <!-- <button class="button-main">Preview Playlist</button> -->
-        <button class="button-main" data-bind-onclick="createPlaylist('TestPlaylist')">Create Playlist</button>
+        <button class="button-main" data-bind-onclick="createPlaylist()">Create Playlist</button>
         <button id="logout-button" class="button-secondary" data-bind-onclick="logoutClick()">Logout</button>
     </div>
 

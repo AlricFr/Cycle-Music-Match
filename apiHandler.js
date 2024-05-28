@@ -1,10 +1,10 @@
 // apiHandler.js
 import { currentToken } from "./script.js";
-import { getSelectedGenre } from "./uiHandler.js";
+import { getSelectedGenre, getSelectedRideLength, getPlaylistName } from "./uiHandler.js";
 
 // Constants
 const clientId = 'f025bd23871b4827a30382a923a7eeba'; // your clientId
-//const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
+// const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
 const redirectUrl = 'https://alricfr.github.io/Cycle-Music-Match/'; // your redirect URL - must be localhost URL and/or HTTPS
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
@@ -83,12 +83,14 @@ async function getRecommendation() {
   // const seedArtists = null;
   //const seedGenre = "work-out";
   const seedGenre = getSelectedGenre();
+  const limit = getDesiredPlaylistLength();
   console.log("Selected Genre");
   console.log(seedGenre);
+  console.log("Limit is "+ limit);
   // const seedTracks = null;
 
   // const url = `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtists}&seed_genres=${seedGenre}&seed_tracks=${seedTracks}`;
-  const url = `https://api.spotify.com/v1/recommendations?limit=10&seed_genres=${seedGenre}`;
+  const url = `https://api.spotify.com/v1/recommendations?limit=${limit}&seed_genres=${seedGenre}`;
 
   console.log("URL: " + url);
   const response = await fetch(url, {
@@ -103,6 +105,19 @@ async function getRecommendation() {
   return await response.json();
 }
 
+function getDesiredPlaylistLength(){
+  const desiredDuration = getSelectedRideLength();
+  const averageSongLength = 4/60; //in hrs to match the entry
+  var requiredSongs = Math.round(desiredDuration/averageSongLength);
+  requiredSongs = requiredSongs +5;
+    
+  if(requiredSongs>100){
+    window.alert("Playlist must be less than 4 hrs long. Will create a 4hr long playlist")
+    return 100;
+  }
+
+  return requiredSongs;
+}
 
 
 async function getAuthorizationURL(){
@@ -155,4 +170,15 @@ async function getFollowedArtists(){
   return await response.json();
 }
 
-export { getToken, refreshToken, getUserData, getUserPlaylists, getGenres, getAuthorizationURL, getRedirectUrl, getFollowedArtists, getRecommendation };
+export {
+  getToken,
+  refreshToken,
+  getUserData,
+  getUserPlaylists,
+  getGenres,
+  getAuthorizationURL,
+  getRedirectUrl,
+  getFollowedArtists,
+  getRecommendation,
+  getDesiredPlaylistLength
+};

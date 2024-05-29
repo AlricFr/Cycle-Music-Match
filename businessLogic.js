@@ -2,7 +2,7 @@
 
 import { getUserData, getUserPlaylists, getRecommendation } from "./apiHandler.js";
 import { currentToken } from "./script.js";
-import { getSelectedGenre, getPlaylistName } from "./uiHandler.js";
+import { getSelectedGenre, getPlaylistName, getRideIntensity } from "./uiHandler.js";
 
 async function createPlaylist() {
   console.log("Create Playlist Button Clicked");  
@@ -76,5 +76,29 @@ async function buildURI(trackArray){
   return uri;
 }
 
-  export { createPlaylist, buildURI };
+//maps what audiofeatures should be supplied based on the ride intensity
+function getAudioFeatures(){
+  var intensity = getRideIntensity();
+  var tempo;
+  var energy;
+  
+  //console.log("Intensity "+intensity);
+
+  if(intensity=="flat"){
+    tempo = 150;
+    energy = 0.9;
+  }
+  if(intensity=="climb"){
+    tempo = 100;
+    energy = 0.8;
+  }
+  if(intensity=="calm"){
+    tempo = 80;
+    energy = 0.5;
+  }
+  // console.log("Tempo: "+tempo+" Energy: "+energy);
+  return [tempo,energy];
+}
+
+  export { createPlaylist, buildURI, getAudioFeatures };
   

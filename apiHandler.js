@@ -1,6 +1,7 @@
 // apiHandler.js
 import { currentToken } from "./script.js";
 import { getSelectedGenre, getSelectedRideLength, getPlaylistName } from "./uiHandler.js";
+import { getAudioFeatures } from "./businessLogic.js";
 
 // Constants
 const clientId = 'f025bd23871b4827a30382a923a7eeba'; // your clientId
@@ -81,16 +82,17 @@ async function getGenres() {
 //parameters need to be refined, prob. best to hand in an array with potentially empty fields than handing over single arguments
 async function getRecommendation() {
   // const seedArtists = null;
-  //const seedGenre = "work-out";
   const seedGenre = getSelectedGenre();
   const limit = getDesiredPlaylistLength();
+  const tempo  = getAudioFeatures()[0];
+  const energy = getAudioFeatures()[1];
   console.log("Selected Genre");
   console.log(seedGenre);
   console.log("Limit is "+ limit);
   // const seedTracks = null;
 
   // const url = `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtists}&seed_genres=${seedGenre}&seed_tracks=${seedTracks}`;
-  const url = `https://api.spotify.com/v1/recommendations?limit=${limit}&seed_genres=${seedGenre}`;
+  const url = `https://api.spotify.com/v1/recommendations?limit=${limit}&seed_genres=${seedGenre}&target_energy=${energy}&target_tempo=${tempo}`;
 
   console.log("URL: " + url);
   const response = await fetch(url, {

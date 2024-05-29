@@ -1,6 +1,6 @@
 // uiHandler.js
 import { getAuthorizationURL, getRedirectUrl, getGenres, getDesiredPlaylistLength } from "./apiHandler.js";
-import { createPlaylist } from './businessLogic.js';
+import { createPlaylist, getAudioFeatures } from './businessLogic.js';
 
 async function redirectToSpotifyAuthorize() {
   let authUrl = await getAuthorizationURL();
@@ -86,6 +86,18 @@ function getPlaylistName(){
   return name;
 }
 
+function getRideIntensity(){
+  var intensity = document.getElementById("ride-intensity").value;
+ 
+  return intensity;
+}
+
+function testingTheButton(){
+  var tempo = getAudioFeatures()[0];
+  var energy = getAudioFeatures()[1];
+  console.log("Retrun test: Tempo "+tempo+" energy "+energy);
+}
+
 export {
   redirectToSpotifyAuthorize,
   loginWithSpotifyClick,
@@ -94,5 +106,7 @@ export {
   renderTemplate,
   getSelectedGenre,
   getSelectedRideLength,
-  getPlaylistName
+  getPlaylistName,
+  getRideIntensity,
+  testingTheButton
 };

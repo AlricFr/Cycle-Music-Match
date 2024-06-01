@@ -10,14 +10,17 @@
 <body>
   <script src="script.js" type="module"></script>
   <script src="businessLogic.js" type="module"></script> 
-
+  <div class="header">
+    <div class="burger-menu"><img src="src/burger-menu.svg" alt=""></div>
+  </div>
   <div id="main"></div>
   <div id="playlist"></div>
   <div id="oauth"></div>
 
   <!-- Landing page template with forward to autorization with spotify-->
   <template id="login">
-    <h1>Cycling Music Match</h1>
+    <img src="src/Title-image.png" class="title-image" alt="">
+    <h1>Stay motivated</h1>
     <p>By connecting Cycling Music Match to Spotify, the curated playlist will be based on your taste and will be available directly in your Spotify Library.</p>
     <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> Log in with Spotify </button>
   </template>

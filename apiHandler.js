@@ -5,8 +5,8 @@ import { getAudioFeatures } from "./businessLogic.js";
 
 // Constants
 const clientId = 'f025bd23871b4827a30382a923a7eeba'; // your clientId
-// const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
-const redirectUrl = 'https://alricfr.github.io/Cycle-Music-Match/'; // your redirect URL - must be localhost URL and/or HTTPS
+const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
+// const redirectUrl = 'https://alricfr.github.io/Cycle-Music-Match/'; // your redirect URL - must be localhost URL and/or HTTPS
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
 const currentUserPlaylists = "https://api.spotify.com/v1/me/playlists";

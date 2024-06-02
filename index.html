@@ -1,11 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <title>Pedal Beats</title>
+  <link rel="stylesheet" href="styles.css">
+
 </head>
+
 <body>
-    <p>Hello World!</p>
+  <script src="script.js" type="module"></script>
+  <script src="businessLogic.js" type="module"></script> 
+  <div class="header">
+    <div class="burger-menu"><img src="src/burger-menu.svg" alt=""></div>
+  </div>
+  <div id="main"></div>
+  <div id="playlist"></div>
+  <div id="oauth"></div>
+
+  <!-- Landing page template with forward to autorization with spotify-->
+  <template id="login">
+    <img src="src/Title-image.png" class="title-image" alt="">
+    <h1 class="title">Stay motivated</h1>
+    <p>Personalize your cycling experience with your favorite tune at the right moment.</p>
+    <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> Log in with Spotify </button>
+  </template>
+  
+  <!-- Selecting Playlist Parameters-->
+  <template id="playlist-select">
+    <h2>Choose your inspiration</h2>
+        <p>By selecting a genre and artist, you control the music added to the new playlist.</p>   
+
+        <h2>Genres</h2>
+          <div><select id="genre-list" class="select-list"></select></div>
+          <div>
+            <label class="text-content">Ride Length in hours</label>
+            <input type="number" class="text-content" id="ride-length"></input>
+          </div>
+          <div>
+            <label class="text-content">Ride intensity</label>
+            <select id="ride-intensity" class="text-content">
+              <option value="flat">Fast & Flat</option>
+              <option value="climb">Steep climb</option>
+              <option value="calm">Cofee ride</option>
+            </select>
+          </div>
+          <!-- <button data-bind-onclick="testingTheButton();" class="button-secondary">Try out Playlist Length</button> -->
+          <label class="text-content">Playlist Name</label>
+          <input type="text" class="text-content" id="playlist-name"></input>
+
+        <!-- <h4>Artists</h4>
+        <div id="artist-list" class="card-container"></div> -->
+        
+
+        
+    
+    <div class="button-container">
+        <!-- <button class="button-main">Preview Playlist</button> -->
+        <button class="button-main" data-bind-onclick="createPlaylist()">Create Playlist</button>
+        <button id="logout-button" class="button-secondary" data-bind-onclick="logoutClick()">Logout</button>
+    </div>
+
+  </template>
+
+  <!-- Review & save Playlist-->
+  <template id="playlist-review">
+    <!-- needs scrollable list of tracks currently considered for the playlist-->
+    <!-- needs button to continue & button to regenerate-->
+  </template>
+
+
+  <template id="playlist-create">
+    <!-- needs a field to enter a name & take over the name to the playlist-->  
+    <!-- <button class="button-main" data-bind-onclick="createPlaylist('TestPlaylist')">Create Playlist</button> -->
+  </template>
+
+  
+
+
+  <template id="oauth-template">
+    <h2>oAuth info</h2>
+    <table>
+      <tr>
+        <td>Access token</td>
+        <td data-bind="access_token"></td>
+      </tr>
+      <tr>
+        <td>Refresh token</td>
+        <td data-bind="refresh_token"></td>
+      </tr>
+      <tr>
+        <td>Expiration at</td>
+        <td data-bind="expires">${getExpirationDate(expires_in)}</td>
+      </tr>
+    </table>
+  </template>
+
+  
 </body>
+
 </html>

@@ -14,11 +14,11 @@
 
   background-color: var(--black-600);
 
-  /* Geometry Variables */
-  --fs-xl: 5rem; 
-  --fs-600: 2.5rem;
-  --fs-500: 1.5rem;
-  --fs-400: 1.25rem;
+  /* Geometry Variables desktop */
+  --fs-xl: 32px; 
+  --fs-600: 20px;
+  --fs-500: 16px;
+  --fs-400: 14px;
 
   --marging-600: 10rem;
   --maring-400: 1rem;
@@ -29,6 +29,24 @@
 
 }
 
+@media (width < 400px) {
+  :root{
+   --fs-xl: 24px; 
+   --fs-600: 18px;
+   --fs-500: 16px;
+   --fs-400: 14px;
+
+  --marging-600: 10rem;
+  --maring-400: 1rem;
+  }
+}
+
+/* * {
+  outline: 1px solid #f00 !important;
+  
+} */
+
+
 .burger-menu{
   height: var(--fs-400);
   width: var(--fs-400); 
@@ -36,21 +54,28 @@
   cursor: pointer;
   background-color: black;
 }
-
+ 
 .title-image{
   width: 80vw;
   margin-left:-10px;
-  margin-top:100px;
-  margin-bottom: 100px;
+  margin-top:50px;
+  margin-bottom: 50px;
 }
 
 .title{
   font-size: var(--fs-600);
   margin: var(--maring-400);
+  color: var(--new-color);
 }
 
 p{
   font-size: var(--fs-400);
   color: var(--white-500);
   margin: var(--maring-400);
+  color: var(--new-color);
+}
+
+
+button{
+  margin: var(--maring-400)
 }

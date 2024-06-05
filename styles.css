@@ -6,6 +6,7 @@
   --white-500: #ffffffdf; 
 
   --primary-color-600: #1D3557;
+  --primary-color-500: #1E4670;
 
   --secondary-color-600:#D1D5DB;
 
@@ -46,6 +47,10 @@
   
 } */
 
+.picture-button{
+  height: 24px;
+  /* margin: auto; */
+}
 
 .burger-menu{
   height: var(--fs-400);
@@ -65,17 +70,50 @@
 .title{
   font-size: var(--fs-600);
   margin: var(--maring-400);
-  color: var(--new-color);
 }
 
 p{
   font-size: var(--fs-400);
   color: var(--white-500);
   margin: var(--maring-400);
-  color: var(--new-color);
 }
 
 
 button{
-  margin: var(--maring-400)
+  /* margin-left: 16px;
+  margin-right: 16px; */
+  margin: auto;
+  margin-top: 50px;
+  background-color: var(--primary-color-600);
+  color: var(--white-600);
+  border-radius: 14px;
+  border: 0px;
+  height: 54px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
+
+button:hover{
+  background-color: var(--primary-color-500);
+}
+
+.button-text{
+  margin-right: 8px;
+}
+
+.success-border{
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid;
+  border-radius: 8px;
+  border-color: var(--success-color);
+  text-align: center;
+}
+
+.message-content{
+  margin: auto;
+ }

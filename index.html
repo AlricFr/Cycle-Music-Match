@@ -24,7 +24,11 @@
     <img src="src/Title-image.jpg" class="title-image" alt="">
     <h1 class="title">Stay motivated</h1>
     <p>Personalize your cycling experience with your favorite tune at the right moment.</p>
-    <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> Log in with Spotify </button>
+    <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> 
+      <div class="button-text">Log in with </div>
+      <img src="src/Spotify_Logo_RGB_White.png" alt="" class="picture-button"> 
+    </button>
+    
   </template>
   
   <!-- Selecting Playlist Parameters-->
@@ -76,6 +80,20 @@
       </tr>
     </table>
   </template>
+
+  <template id="playlist-creation-success">
+    <div class="success-border">
+      <p class="message-content">Playlist created successfully. 
+        Check your Spotify Library to review it.
+        <br>
+        <br>
+        Save ride! </p>
+    </div>
+    <button data-bind-onclick="createNewPlaylist()">Create new playlist</button>
+
+  </template>
+
+
 
   <!-- <p class="subtle">Photo Credits to https://unsplash.com/photos/black-road-bicycle-handle-with-black-background-XVTWFHcNIko?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash</p> -->
 </body>

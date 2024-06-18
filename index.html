@@ -11,7 +11,7 @@
   <script src="https://cdn.amplitude.com/libs/plugin-autocapture-browser-0.9.0-min.js.gz"></script>
   <script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1})).promise.then(function() {window.amplitude.add(window.amplitudeAutocapturePlugin.plugin());window.amplitude.init('2169d14f3300d8290eb992db7141aaaa');});</script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="email.js"></script>
+  <script src="email.js" type="module"></script>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
     
     <p>First time here? To be able to use this app, you need to be register with the same E-Mail address you use on Spotify.</p>
     <input type="text" id="email" placeholder='E-Mail'> 
-    <button class="primary-button" id="register-button" data-bind-onclick="register();"> 
+    <button class="primary-button" id="register-button" data-bind-onclick="testingTheButton();"> 
       <div class="button-text">Register</div>
     </button>
     <button class="secondary-button" id="login-button" data-bind-onclick="loginWithSpotifyClick();"> 
@@ -104,7 +104,14 @@
 
   </template>
 
-
+  <template id="registration-creation-success">
+    <div class="success-border">
+      <p class="message-content">Your request for registration was received!
+        <br>
+        <br>
+        You will receive an email once you have been addmitted. This typically happens within 12 hours.</p>
+    </div>
+  </template>
 
   <!-- <p class="subtle">Photo Credits to https://unsplash.com/photos/black-road-bicycle-handle-with-black-background-XVTWFHcNIko?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash</p> -->
 </body>

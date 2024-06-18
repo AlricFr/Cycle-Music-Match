@@ -83,20 +83,32 @@ button{
   /* margin-left: 16px;
   margin-right: 16px; */
   margin: auto;
-  margin-top: 50px;
-  /* background-color: var(--primary-color-600); */
-  background-color: white;
-  color: black;
-  /* color: var(--white-600); */
+  margin-top: 9px;
+  margin-bottom: 9px;
+  background-color: var(--primary-color-600);
+  /* background-color: white; */
+  /* color: black; */
+  color: var(--white-600);
   border-radius: 14px;
   border: 0px;
-  height: 54px;
+  height: 40px;
   min-width: 200px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.primary-button{
+  height: 40px;
+}
+
+.secondary-button{
+  background-color: var(--black-600);
+  color: var(--white-600);
+  border: solid 2px;
+  border-color: var(--primary-color-600);
 }
 
 button:hover{
@@ -107,6 +119,11 @@ button:hover{
   margin-right: 8px;
 }
 
+input{
+  margin:auto;
+  display: flex;
+  color: grey;  
+}
 .success-border{
   margin: 20px;
   padding: 20px;

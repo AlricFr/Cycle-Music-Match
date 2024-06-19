@@ -16,7 +16,8 @@ function register(){
     emailjs.send('service_3o95v0a', 'template_zw4gfws', obj)
             .then(() => {
                 console.log('SUCCESS!');
-                renderTemplate("main","registration-creation-success", null)
+                renderTemplate("main","registration-creation-success", null);
+                window.localStorage.setItem("registered", true);
             }, (error) => {
                 console.log('FAILED...', error);
             });

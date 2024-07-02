@@ -143,6 +143,7 @@ input{
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-top: 1rem;
 }
 
 .profile-image{
@@ -155,4 +156,71 @@ a {
   color:var(--white-500);
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  color: var(--white-600);
+}
+
+header {
+  background-color: var(--black-600);
+  color: var(--white-600);
+  padding: 20px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+main {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.release-note {
+  background: var(--primary-color-500);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.release-date {
+  font-size: 0.9em;
+  color: var(--white-500);
+  margin-bottom: 10px;
+}
+
+.release-title {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+.release-description {
+  font-size: 1em;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  header h1 {
+      font-size: 2em;
+  }
+
+  .release-note {
+      padding: 15px;
+  }
+
+  .release-title {
+      font-size: 1.2em;
+  }
+
+  .release-description {
+      font-size: 0.9em;
+  }
 }

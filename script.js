@@ -6,13 +6,13 @@ import { buildURI } from './businessLogic.js';
 import { register } from './email.js';
 
 
-var firstTimeUser =localStorage.getItem("registered");
-console.log("First Time?"+firstTimeUser);
+// var firstTimeUser =localStorage.getItem("registered");
+// console.log("First Time?"+firstTimeUser);
 
-if(firstTimeUser==null){
-  // renderTemplate("registration", "registration-template", null);
-  document.getElementById("registration");
-}
+// if(firstTimeUser==null){
+//   // renderTemplate("registration", "registration-template", null);
+//   document.getElementById("registration");
+// }
 
 // should be in API Handler -> here only a getCurrentToken function should be called
 // Data structure that manages the current active token, caching it in localStorage
@@ -40,8 +40,12 @@ const code = args.get('code');
 
 // If we find a code, we're in a callback, do a token exchange
 if (code) {
-  const token = await getToken(code);
-  currentToken.save(token);
+  // const token = await getToken(code);
+  // currentToken.save(token);
+
+  getToken(code)
+    .then(token => {
+      currentToken.save(token);
 
   // Remove code from URL so we can refresh correctly.
   const url = new URL(window.location.href);
@@ -49,6 +53,8 @@ if (code) {
 
   const updatedUrl = url.search ? url.href : url.href.replace('?', '');
   window.history.replaceState({}, document.title, updatedUrl);
+    })
+    .catch(error => console.error('Error getting token:', error));
 }
 
 

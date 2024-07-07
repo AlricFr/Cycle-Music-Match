@@ -1,16 +1,18 @@
 // apiHandler.js
-import { currentToken } from "./script.js";
-import { getSelectedGenre, getSelectedRideLength, getPlaylistName } from "./uiHandler.js";
-import { getAudioFeatures } from "./businessLogic.js";
+
 
 // Constants
 const clientId = 'f025bd23871b4827a30382a923a7eeba'; // your clientId
-// const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
-const redirectUrl = 'https://pedalbeats.app';
+const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
+// const redirectUrl = 'https://pedalbeats.app';
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
 const currentUserPlaylists = "https://api.spotify.com/v1/me/playlists";
 const scope = 'user-read-private user-read-email playlist-read-private playlist-modify-private playlist-modify-public user-follow-read';
+
+import { currentToken } from "./script.js";
+import { getSelectedGenre, getSelectedRideLength, getPlaylistName } from "./uiHandler.js";
+import { getAudioFeatures } from "./businessLogic.js";
 
 async function getToken(code) {
   const code_verifier = localStorage.getItem('code_verifier');

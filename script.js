@@ -52,7 +52,7 @@ if (currentToken.access_token) {
   // console.log("GenreObj");
   // console.log(genreObj);
   renderTemplate("main", "playlist-select", userData);
-  renderTemplate("playlist", "playlist-create", userData);
+  // renderTemplate("playlist", "playlist-create", userData);
   //const obj = userPlaylists.items;
   const selectGenre = document.getElementById("genre-list");
   genreObj.forEach((item) => {

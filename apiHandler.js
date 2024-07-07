@@ -7,7 +7,7 @@ import { getAudioFeatures } from "./businessLogic.js";
 const clientId = 'f025bd23871b4827a30382a923a7eeba'; // your clientId
 // const redirectUrl = 'http://127.0.0.1:5500/index.html'; // your redirect URL - must be localhost URL and/or HTTPS
 // const redirectUrl = 'https://alricfr.github.io/Cycle-Music-Match/'; // your redirect URL - must be localhost URL and/or HTTPS
-const redirectUrl = 'http://pedalbeats.app';
+const redirectUrl = 'https://pedalbeats.app';
 const authorizationEndpoint = "https://accounts.spotify.com/authorize";
 const tokenEndpoint = "https://accounts.spotify.com/api/token";
 const currentUserPlaylists = "https://api.spotify.com/v1/me/playlists";
@@ -55,7 +55,34 @@ async function getUserData() {
     headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
   });
 
-  return await response.json();
+  
+  return await handleResponse(response);
+}
+
+async function handleResponse(response){
+  
+  
+  if (response.ok) {
+    return await response.json();
+  } else {
+    if (response.status === 401) {
+      await refreshToken();
+      // Retry logic can be placed here if desired
+    } else if (response.status === 429) {
+      // Handle rate limiting
+      window.alert('Rate limited. Please retry later.');
+     
+    } else if (response.status === 400) {
+      // Handle rate limiting
+      const errorData = await response.json();
+      console.log(errorData);
+      window.alert('Status 400. Bad Request Received. ' + errorData.error.message);
+     
+    } else {
+      const errorData = await response.json();
+      throw new Error(`Error ${response.status}: ${errorData.error.message}`);
+    }
+  }
 }
 
 async function getUserPlaylists() {
@@ -74,7 +101,7 @@ async function getGenres() {
   //   method: 'GET',
   //   headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
   // });
-  const response = {"genres": ["alternative", "samba", "hip-hop", "classic", "rock", "afrobeat", "club", "deep-house", "drum-and-bass","electro","hard-rock","power-pop", "techno"]};
+  const response = {"genres": ["alternative", "samba", "hip-hop", "classic", "rock", "afrobeat", "club", "deep-house", "drum-and-bass","electro","hard-rock","power-pop", "techno", "TEST Error handling"]};
   console.log(response);
   //return await response.json();
   return response;
@@ -90,9 +117,7 @@ async function getRecommendation() {
   console.log("Selected Genre");
   console.log(seedGenre);
   console.log("Limit is "+ limit);
-  // const seedTracks = null;
 
-  // const url = `https://api.spotify.com/v1/recommendations?seed_artists=${seedArtists}&seed_genres=${seedGenre}&seed_tracks=${seedTracks}`;
   const url = `https://api.spotify.com/v1/recommendations?limit=${limit}&seed_genres=${seedGenre}&target_energy=${energy}&target_tempo=${tempo}`;
 
   console.log("URL: " + url);
@@ -105,7 +130,7 @@ async function getRecommendation() {
 
   // console.log("Recommendation");
   // console.log(response);
-  return await response.json();
+  return await handleResponse(response);
 }
 
 function getDesiredPlaylistLength(){
@@ -183,5 +208,6 @@ export {
   getRedirectUrl,
   getFollowedArtists,
   getRecommendation,
-  getDesiredPlaylistLength
+  getDesiredPlaylistLength,
+  handleResponse
 };

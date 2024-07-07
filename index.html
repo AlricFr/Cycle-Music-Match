@@ -2,9 +2,11 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pedal Beats</title>
   <link rel="stylesheet" href="styles.css">
-
+  <script src="https://cdn.amplitude.com/libs/analytics-browser-2.7.4-min.js.gz"></script><script src="https://cdn.amplitude.com/libs/plugin-session-replay-browser-1.4.1-min.js.gz"></script><script src="https://cdn.amplitude.com/libs/plugin-autocapture-browser-0.9.0-min.js.gz"></script><script>window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1})).promise.then(function() {window.amplitude.add(window.amplitudeAutocapturePlugin.plugin());window.amplitude.init('2169d14f3300d8290eb992db7141aaaa');});</script>
 </head>
 
 <body>
@@ -14,15 +16,19 @@
     <div class="burger-menu"><img src="src/burger-menu.svg" alt=""></div>
   </div>
   <div id="main"></div>
-  <div id="playlist"></div>
+  <!-- <div id="playlist"></div> -->
   <div id="oauth"></div>
 
   <!-- Landing page template with forward to autorization with spotify-->
   <template id="login">
-    <img src="src/Title-image.png" class="title-image" alt="">
+    <img src="src/Title-image.jpg" class="title-image" alt="">
     <h1 class="title">Stay motivated</h1>
     <p>Personalize your cycling experience with your favorite tune at the right moment.</p>
-    <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> Log in with Spotify </button>
+    <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> 
+      <div class="button-text">Log in with </div>
+      <img src="src/Spotify_Logo_RGB_Black.png" alt="" class="picture-button"> 
+    </button>
+    
   </template>
   
   <!-- Selecting Playlist Parameters-->
@@ -47,11 +53,6 @@
           <!-- <button data-bind-onclick="testingTheButton();" class="button-secondary">Try out Playlist Length</button> -->
           <label class="text-content">Playlist Name</label>
           <input type="text" class="text-content" id="playlist-name"></input>
-
-        <!-- <h4>Artists</h4>
-        <div id="artist-list" class="card-container"></div> -->
-        
-
         
     
     <div class="button-container">
@@ -61,21 +62,6 @@
     </div>
 
   </template>
-
-  <!-- Review & save Playlist-->
-  <template id="playlist-review">
-    <!-- needs scrollable list of tracks currently considered for the playlist-->
-    <!-- needs button to continue & button to regenerate-->
-  </template>
-
-
-  <template id="playlist-create">
-    <!-- needs a field to enter a name & take over the name to the playlist-->  
-    <!-- <button class="button-main" data-bind-onclick="createPlaylist('TestPlaylist')">Create Playlist</button> -->
-  </template>
-
-  
-
 
   <template id="oauth-template">
     <h2>oAuth info</h2>
@@ -95,7 +81,21 @@
     </table>
   </template>
 
-  
+  <template id="playlist-creation-success">
+    <div class="success-border">
+      <p class="message-content">Playlist created successfully. 
+        Check your Spotify Library to review it.
+        <br>
+        <br>
+        Save ride! </p>
+    </div>
+    <button data-bind-onclick="createNewPlaylist()">Create new playlist</button>
+
+  </template>
+
+
+
+  <!-- <p class="subtle">Photo Credits to https://unsplash.com/photos/black-road-bicycle-handle-with-black-background-XVTWFHcNIko?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash</p> -->
 </body>
 
 </html>

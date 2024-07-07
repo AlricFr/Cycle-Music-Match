@@ -6,6 +6,7 @@
   --white-500: #ffffffdf; 
 
   --primary-color-600: #1D3557;
+  --primary-color-500: #1E4670;
 
   --secondary-color-600:#D1D5DB;
 
@@ -14,11 +15,11 @@
 
   background-color: var(--black-600);
 
-  /* Geometry Variables */
-  --fs-xl: 5rem; 
-  --fs-600: 2.5rem;
-  --fs-500: 1.5rem;
-  --fs-400: 1.25rem;
+  /* Geometry Variables desktop */
+  --fs-xl: 32px; 
+  --fs-600: 20px;
+  --fs-500: 16px;
+  --fs-400: 14px;
 
   --marging-600: 10rem;
   --maring-400: 1rem;
@@ -29,6 +30,28 @@
 
 }
 
+@media (width < 400px) {
+  :root{
+   --fs-xl: 24px; 
+   --fs-600: 18px;
+   --fs-500: 16px;
+   --fs-400: 14px;
+
+  --marging-600: 10rem;
+  --maring-400: 1rem;
+  }
+}
+
+/* * {
+  outline: 1px solid #f00 !important;
+  
+} */
+
+.picture-button{
+  height: 24px;
+  /* margin: auto; */
+}
+
 .burger-menu{
   height: var(--fs-400);
   width: var(--fs-400); 
@@ -36,12 +59,12 @@
   cursor: pointer;
   background-color: black;
 }
-
+ 
 .title-image{
   width: 80vw;
   margin-left:-10px;
-  margin-top:100px;
-  margin-bottom: 100px;
+  margin-top:50px;
+  margin-bottom: 50px;
 }
 
 .title{
@@ -54,3 +77,45 @@ p{
   color: var(--white-500);
   margin: var(--maring-400);
 }
+
+
+button{
+  /* margin-left: 16px;
+  margin-right: 16px; */
+  margin: auto;
+  margin-top: 50px;
+  /* background-color: var(--primary-color-600); */
+  background-color: white;
+  color: black;
+  /* color: var(--white-600); */
+  border-radius: 14px;
+  border: 0px;
+  height: 54px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+button:hover{
+  background-color: var(--primary-color-500);
+}
+
+.button-text{
+  margin-right: 8px;
+}
+
+.success-border{
+  margin: 20px;
+  padding: 20px;
+  border: 2px solid;
+  border-radius: 8px;
+  border-color: var(--success-color);
+  text-align: center;
+}
+
+.message-content{
+  margin: auto;
+ }

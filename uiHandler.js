@@ -1,5 +1,5 @@
 // uiHandler.js
-import { getAuthorizationURL, getRedirectUrl, getGenres, getDesiredPlaylistLength } from "./apiHandler.js";
+import { getAuthorizationURL, getRedirectUrl, getGenres, getDesiredPlaylistLength, getUserData } from "./apiHandler.js";
 import { createPlaylist, getAudioFeatures } from './businessLogic.js';
 
 async function redirectToSpotifyAuthorize() {
@@ -14,6 +14,10 @@ async function loginWithSpotifyClick() {
 async function logoutClick() {
   localStorage.clear();
   window.location.href = getRedirectUrl();
+}
+
+function createNewPlaylist(){
+  renderTemplate("main","playlist-select",getUserData())
 }
 
 //should get automaticly handled witin API if token expired
@@ -102,6 +106,7 @@ export {
   redirectToSpotifyAuthorize,
   loginWithSpotifyClick,
   logoutClick,
+  createNewPlaylist,
   refreshTokenClick,
   renderTemplate,
   getSelectedGenre,

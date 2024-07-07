@@ -1,8 +1,6 @@
-// businessLogic.js
-
-import { getUserData, getUserPlaylists, getRecommendation } from "./apiHandler.js";
+import { getUserData, getUserPlaylists, getRecommendation, handleResponse } from "./apiHandler.js";
 import { currentToken } from "./script.js";
-import { getSelectedGenre, getPlaylistName, getRideIntensity } from "./uiHandler.js";
+import { getSelectedGenre, getPlaylistName, getRideIntensity, renderTemplate } from "./uiHandler.js";
 
 async function createPlaylist() {
   console.log("Create Playlist Button Clicked");  
@@ -27,6 +25,8 @@ async function createPlaylist() {
         }),
       }
     );
+
+    handleResponse(response);
   
     // Get playlist ID of the just created playlist
     let allPlaylists = await getUserPlaylists();
@@ -59,6 +59,11 @@ async function createPlaylist() {
         position: 0
       }),
     });
+
+    handleResponse(trackResponse);
+    //Still needs the reaction on error handling -> show different than just warning screen
+    renderTemplate("main","playlist-creation-success", userData)
+
   }
   
 async function buildURI(trackArray){

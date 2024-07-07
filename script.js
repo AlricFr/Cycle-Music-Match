@@ -6,7 +6,13 @@ import { buildURI } from './businessLogic.js';
 import { register } from './email.js';
 
 
+var firstTimeUser =localStorage.getItem("registered");
+console.log("First Time?"+firstTimeUser);
 
+if(firstTimeUser==null){
+  // renderTemplate("registration", "registration-template", null);
+  document.getElementById("registration");
+}
 
 // should be in API Handler -> here only a getCurrentToken function should be called
 // Data structure that manages the current active token, caching it in localStorage

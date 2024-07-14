@@ -101,7 +101,7 @@ async function getGenres() {
   //   method: 'GET',
   //   headers: { 'Authorization': 'Bearer ' + currentToken.access_token },
   // });
-  const response = {"genres": ["alternative", "samba", "hip-hop", "classic", "rock", "afrobeat", "club", "deep-house", "drum-and-bass","electro","hard-rock","power-pop", "techno", "TEST Error handling"]};
+  const response = {"genres": ["alternative", "samba", "hip-hop", "classic", "rock", "afrobeat", "club", "deep-house", "drum-and-bass","electro","hard-rock","power-pop", "techno"]};
   console.log(response);
   //return await response.json();
   return response;

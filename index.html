@@ -35,43 +35,57 @@
     <img src="src/Title-image.jpg" class="title-image" alt="">
     <h1 class="title">Stay motivated</h1>
     <p>Personalize your cycling experience with your favorite tune at the right moment.</p>
-    <button id="login-button" data-bind-onclick="loginWithSpotifyClick();"> 
-      <div class="button-text">Log in with </div>
-      <img src="src/Spotify_Logo_RGB_White.png" alt="" class="picture-button"> 
-    </button>
-    
+    <p>First time here? To be able to use this app, you need to be register with the same E-Mail address you use on
+      Spotify.</p>
+    <div class="form-container">
+      <input type="text" id="email" placeholder='E-Mail'>
+      <div class="button-container">
+        <button class="primary-button" id="register-button" data-bind-onclick="register();">
+          <div class="button-text">Register</div>
+        </button>
+  
+        <button class="secondary-button" id="login-button" data-bind-onclick="loginWithSpotifyClick();">
+          <div class="button-text">Log in with </div>
+          <img src="src/Spotify_Logo_RGB_White.png" alt="" class="picture-button">
+        </button>
+      </div>
+    </div>
   </template>
   
   <!-- Selecting Playlist Parameters-->
   <template id="playlist-select">
-    <h2>Choose your inspiration</h2>
-        <p>By selecting a genre and artist, you control the music added to the new playlist.</p>   
-
-        <h2>Genres</h2>
-          <div><select id="genre-list" class="select-list"></select></div>
-          <div>
-            <label class="text-content">Ride Length in hours</label>
-            <input type="number" class="text-content" id="ride-length"></input>
-          </div>
-          <div>
-            <label class="text-content">Ride intensity</label>
-            <select id="ride-intensity" class="text-content">
+    <div class="form-container">
+      <img src="src/Title-image.jpg" class="title-image" alt="">
+      <h2>Choose your inspiration</h2>
+      <p>By selecting a genre and artist, you control the music added to the new playlist.</p>
+  
+      <div class="form-group">
+          <label>Genres </label>
+          <select id="genre-list" class="form-control select-list"></select>
+      </div>
+      <div class="form-group">
+          <label class="text-content">Ride Length in hours</label>
+          <input type="number" class="form-control text-content" id="ride-length"></input>
+      </div>
+      <div class="form-group">
+          <label class="text-content">Ride intensity</label>
+          <select id="ride-intensity" class="form-control text-content">
               <option value="flat">Fast & Flat</option>
               <option value="climb">Steep climb</option>
               <option value="calm">Cofee ride</option>
-            </select>
-          </div>
-          <!-- <button data-bind-onclick="testingTheButton();" class="button-secondary">Try out Playlist Length</button> -->
+          </select>
+      </div>
+      <div class="form-group">
           <label class="text-content">Playlist Name</label>
-          <input type="text" class="text-content" id="playlist-name"></input>
-        
-    
-    <div class="button-container">
-        <!-- <button class="button-main">Preview Playlist</button> -->
-        <button class="button-main" data-bind-onclick="createPlaylist()">Create Playlist</button>
-        <button id="logout-button" class="button-secondary" data-bind-onclick="logoutClick()">Logout</button>
-    </div>
-
+          <input type="text" class="form-control text-content" id="playlist-name"></input>
+      </div>
+  
+      <div class="button-container">
+          <button class="primary-button" data-bind-onclick="createPlaylist()">Create Playlist</button>
+          <button id="logout-button" class="secondary-button" data-bind-onclick="logoutClick()">Logout</button>
+      </div>
+  </div>
+  
   </template>
 
   <template id="oauth-template">

@@ -3,6 +3,7 @@
 import { redirectToSpotifyAuthorize, loginWithSpotifyClick, logoutClick, refreshTokenClick, renderTemplate } from './uiHandler.js';
 import { getToken, refreshToken, getUserData, getUserPlaylists, getGenres, getFollowedArtists, getRecommendation } from './apiHandler.js';
 import { buildURI } from './businessLogic.js';
+import { register } from './email.js';
 
 
 // should be in API Handler -> here only a getCurrentToken function should be called
